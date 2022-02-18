@@ -41,11 +41,14 @@ html {
   border-radius: 0 0 100px 100px;
 }
 
+div[class|="diagram-node"] {
+  display: flex;
+  align-items: center;
+}
+
 .diagram-node--big {
 /* Display & Box Model */
-  display: flex;
   justify-content: center;
-  align-items: center;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -57,13 +60,15 @@ html {
 }
 
 .diagram-node {
+  /* Positioning */
   position: relative;
-  display: flex;
+
+  /* Display & Box Model */
   justify-content: space-around;
-  align-items: center;
   width: 15%;
   height: 50px;
 
+  /* Other */
   font-size: 1.5rem;
 }
 
@@ -86,45 +91,46 @@ html {
 }
 
 .node--tiny {
+  /* Display & Box Model */
   width: 15px;
   height: 15px;
   border: 3px solid rgba(0, 64, 255, 0.66);
   border-radius: 50%;
+
+  /* Other */
   background-color: white;
 }
 
-.diagram-inner > div:first-child {
+.diagram-inner > div {
   position: absolute;
+}
+
+.diagram-inner > div:first-child {
   top: -30px;
   left: -25px;
 }
 
 .diagram-inner > div:nth-child(2) {
-  position: absolute;
   bottom: -26px;
   left: 15%;
 }
 
 .diagram-inner > div:nth-child(3) {
-  position: absolute;
   bottom: -25px;
   left: 40%;
 }
 
 .diagram-inner > div:nth-child(4) {
-  position: absolute;
   bottom: -26px;
   right: 30%;
 }
 
 .diagram-inner > div:nth-child(5) {
-  position: absolute;
   bottom: -25px;
   left: 80%;
 }
 
 .diagram-inner > div:last-child {
-  position: absolute;
   top: -30px;
   right: -25px;
 }
