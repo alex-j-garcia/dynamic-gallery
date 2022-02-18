@@ -56,16 +56,33 @@ html {
   background-color: white;
 }
 
+.diagram-node {
+  width: 15%;
+  height: 50px;
+}
+
 .diagram-inner > div:first-child {
   position: absolute;
   top: -30px;
   left: -25px;
 }
 
+.diagram-inner > div:nth-child(2) {
+  position: absolute;
+  bottom: -25px;
+  left: 15%;
+}
+
 .diagram-inner > div:nth-child(3) {
   position: absolute;
   bottom: -25px;
   left: 40%;
+}
+
+.diagram-inner > div:nth-child(4) {
+  position: absolute;
+  bottom: -25px;
+  right: 30%;
 }
 
 .diagram-inner > div:nth-child(5) {
