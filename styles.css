@@ -57,8 +57,20 @@ html {
 }
 
 .diagram-node {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   width: 15%;
   height: 50px;
+}
+
+.node--tiny {
+  width: 15px;
+  height: 15px;
+  border: 3px solid rgba(0, 64, 255, 0.66);
+  border-radius: 50%;
+  background-color: white;
 }
 
 .diagram-inner > div:first-child {
@@ -69,7 +81,7 @@ html {
 
 .diagram-inner > div:nth-child(2) {
   position: absolute;
-  bottom: -25px;
+  bottom: -26px;
   left: 15%;
 }
 
@@ -81,7 +93,7 @@ html {
 
 .diagram-inner > div:nth-child(4) {
   position: absolute;
-  bottom: -25px;
+  bottom: -26px;
   right: 30%;
 }
 
