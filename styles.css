@@ -63,6 +63,26 @@ html {
   align-items: center;
   width: 15%;
   height: 50px;
+
+  font-size: 1.5rem;
+}
+
+.diagram-node > i {
+  position: absolute;
+}
+
+.diagram-node > i:first-child {
+  top: 0;
+  left: -5px;
+}
+
+.diagram-node > i:nth-child(2) {
+  top: 0;
+  right: -5px;
+}
+
+.diagram-node > i:nth-child(3) {
+  bottom: -5px;
 }
 
 .node--tiny {
