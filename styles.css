@@ -18,23 +18,23 @@ html {
   width: min(100%, 800px);
   overflow-x: auto;
   margin: 5rem auto;
-  outline: 1px solid red;
 }
 
 .diagram-outer {
   width: 800px;
   margin-top: 3rem;
   border-top: 1rem solid rgba(20, 58, 249, 0.222);
+  padding-bottom: .1rem;
 }
 
 .diagram-inner {
   width: 80%;
-  height: 200px;
-  margin: 0 auto;
+  height: 100px;
+  margin: 0 auto 100px;
 
   border-bottom: .4rem solid rgba(0, 64, 255, 0.66);
   border-left: .4rem solid rgba(0, 64, 255, 0.66);
-  border-right: .4rem solid rgba(0, 64, 255, 0.66);;
+  border-right: .4rem solid rgba(0, 64, 255, 0.66);
   border-radius: 0 0 100px 100px;
 }
 
@@ -42,8 +42,18 @@ html {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: purple;
+  border: .4rem solid rgba(0, 64, 255, 0.66);
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 2.5rem;
+}
+
+.fas {
+  color: rgba(0, 64, 255, 0.66);
+}
+
+/* Utility Classes */
+.debugging {
+  outline: 1px solid red;
 }
