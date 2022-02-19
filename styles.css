@@ -16,12 +16,13 @@ html {
 
 .container {
   width: min(100%, 900px);
-  overflow-x: auto;
+  /* overflow-x: auto; */
   margin: 5rem auto;
 }
 
 .diagram-outer {
-  width: 800px;
+  width: 900px;
+  /* overflow-x: scroll; */
   margin-top: 3rem;
   border-top: 1rem solid rgba(20, 58, 249, 0.222);
   padding-bottom: .1rem;
@@ -141,6 +142,7 @@ div[class|="diagram-node"] {
 
 .gallery {
   display: flex;
+  flex-wrap: wrap;
 }
 
 [class$="arrow"] > div {
@@ -170,6 +172,7 @@ article {
 
 .gallery-content {
   margin: 0 6rem;
+  flex: 1 1 50%;
 }
 
 h1,
@@ -201,4 +204,27 @@ code {
  *******************/
 .debugging {
   outline: 1px solid red;
+}
+
+/********************
+ * Media Queries ||
+ *******************/
+@media only screen and (max-width: 916px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .gallery-content {
+    order: -1;
+    flex: 1 1 100%;
+    margin: 0;
+  }
+
+  .gallery-right-arrow {
+    margin-left: auto;
+  }
+
+  [class$="arrow"] > div {
+    margin-top: 0;
+  }
 }
