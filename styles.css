@@ -63,6 +63,10 @@ div[class|="diagram-node"] {
   background-color: white;
 }
 
+[class^="diagram-node"] {
+  cursor: pointer;
+}
+
 .diagram-node {
   /* Positioning */
   position: relative;
