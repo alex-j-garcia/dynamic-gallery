@@ -161,7 +161,7 @@ div[class|="diagram-node"] {
   flex-wrap: wrap;
 }
 
-[class$="arrow"] > div {
+[class*="arrow"] > div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -173,12 +173,20 @@ div[class|="diagram-node"] {
   font-size: 3rem;
 }
 
-[class$="arrow"] > div:hover {
+[class*="arrow"] > div:hover {
   cursor: pointer;
 }
 
-[class$="arrow"] > div:active {
+[class*="arrow"] > div:active {
   border: 1px solid hsla(225, 100%, 50%, 0.66);
+}
+
+.disabled i {
+  color:hsla(0, 0%, 80%, 0.9);
+}
+
+.disabled > div:active {
+  border: 1px solid hsla(0, 0%, 0%, 0.106);
 }
 
 article {
