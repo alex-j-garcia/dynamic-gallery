@@ -147,6 +147,15 @@ div[class|="diagram-node"] {
   color: hsla(225, 100%, 50%, 0.66);
 }
 
+.active-Node {
+  background-color: hsl(300, 100%, 25%);
+  border: none;
+}
+
+.active-Node i {
+  color: white;
+}
+
 .gallery {
   display: flex;
   flex-wrap: wrap;
