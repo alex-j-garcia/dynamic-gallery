@@ -199,6 +199,14 @@ article {
   flex: 1 1 50%;
 }
 
+.gallery-content > article {
+  display: none;
+}
+
+article.article-visible {
+  display: block;
+}
+
 h1,
 h2,
 p {
