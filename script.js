@@ -4,6 +4,14 @@
   const init = () => {
     let nodesList = document.querySelectorAll("[class^='diagram-node']");
     [...nodesList].forEach((node) => node.addEventListener("click", showcase));
+    let arrows = document.querySelectorAll("[class*='arrow']");
+    [...arrows].forEach((arrow) => {
+      if (arrow.classList.contains("gallery-left-arrow")) {
+        arrow.addEventListener("click", previous);
+      } else {
+        arrow.addEventListener("click", next);
+      }
+    });
   };
 
   const showcase = ({currentTarget}) => {
@@ -39,6 +47,10 @@
     ));
     article.classList.add("article-visible");
   };
+
+  const previous = () => console.log("left");
+
+  const next = () => console.log("right");
 
   init();
 }());
