@@ -3,28 +3,42 @@
 (function() {
   const init = () => {
     let nodesList = document.querySelectorAll("[class^='diagram-node']");
-    [...nodesList].forEach(node => node.addEventListener("click", showcase));
+    [...nodesList].forEach((node) => node.addEventListener("click", showcase));
   };
 
   const showcase = ({currentTarget}) => {
-    let lastActive = deactivate();
-    let current = activate(currentTarget);
+    deactivate();
+    activate(currentTarget);
+    showContent(currentTarget, hideContent());
   }
 
   const deactivate = () => {
     let nodesList = document.querySelectorAll("[class^='diagram-node']");
     let nodesArray = [...nodesList];
-    let activeNode = nodesArray.find(node => node.classList.contains('active'));
-    return activeNode.classList.remove('active') || activeNode;
+    let activeNode = nodesArray.find((node) => (
+      node.classList.contains('active')
+    ));
+    activeNode.classList.remove('active');
   }
 
-  const activate = node => {
-    if (node.classList.contains("node--tiny")) {
-      return node.offsetParent.classList.add(".active") || node.offsetParent;
-    }
+  const activate = (node) => node.classList.add("active");
 
-    return node.classList.add("active") || node;
-  }
+  const hideContent = (node) => {
+    let articlesList = document.querySelectorAll('article');
+    let articlesArray = [...articlesList];
+    let visibleArticle = articlesArray.find((article) => (
+      article.classList.contains("article-visible")
+    ));
+    return visibleArticle.classList.remove("article-visible") || articlesArray;
+  };
+
+  const showContent = (node, articles) => {
+    let contentID = node.getAttribute("data-id");
+    let article = articles.find((article) => (
+      article.getAttribute("data-content") == contentID
+    ));
+    article.classList.add("article-visible");
+  };
 
   init();
-})();
+}());
