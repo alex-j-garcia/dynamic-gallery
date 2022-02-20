@@ -20,16 +20,28 @@
     showContent(currentTarget, hideContent());
   }
 
+  const previous = () => console.log("left");
+
+  const next = ({currentTarget}) => {
+    if (currentTarget.classList.contains("disabled")) {
+      return;
+    }
+
+    let last = deactivate();
+    let current = activate(last.nextElementSibling);
+    showContent(current, hideContent());
+  };
+
   const deactivate = () => {
     let nodesList = document.querySelectorAll("[class^='diagram-node']");
     let nodesArray = [...nodesList];
     let activeNode = nodesArray.find((node) => (
       node.classList.contains('active')
     ));
-    activeNode.classList.remove('active');
+    return activeNode.classList.remove('active') || activeNode;
   }
 
-  const activate = (node) => node.classList.add("active");
+  const activate = (node) => node.classList.add("active") || node;
 
   const hideContent = (node) => {
     let articlesList = document.querySelectorAll('article');
@@ -47,10 +59,6 @@
     ));
     article.classList.add("article-visible");
   };
-
-  const previous = () => console.log("left");
-
-  const next = () => console.log("right");
 
   init();
 }());
