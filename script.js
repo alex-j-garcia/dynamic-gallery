@@ -20,7 +20,39 @@
     showContent(currentTarget, hideContent());
   }
 
-  const previous = () => console.log("left");
+  const arrowController = (index) => {
+    const LEFT_DISABLE = 0;
+    const RIGHT_DISABLE = 5;
+
+    if (index == LEFT_DISABLE) {
+      let leftArrow = document.querySelector(".gallery-left-arrow");
+      leftArrow.classList.add("disabled");
+      return;
+    } else if (index == RIGHT_DISABLE) {
+      let rightArrow = document.querySelector(".gallery-right-arrow");
+      rightArrow.classList.add("disabled");
+      return;
+    }
+
+    let disabled = document.querySelector("[class*='disabled']");
+    if (disabled) disabled.classList.remove("disabled");
+  };
+
+  const previous = ({currentTarget}) => {
+    if (currentTarget.classList.contains("disabled")) {
+      return;
+    }
+
+    let nodesList = document.querySelectorAll("[class^='diagram-node']");
+    let nodesArray = [...nodesList];
+    let index = nodesArray.findIndex((node) => (
+      node.classList.contains("active")
+    )) - 1;
+
+    deactivate();
+    activate(nodesArray[index]);
+    arrowController(index);
+  };
 
   const next = ({currentTarget}) => {
     if (currentTarget.classList.contains("disabled")) {
@@ -29,18 +61,13 @@
 
     let nodesList = document.querySelectorAll("[class^='diagram-node']");
     let nodesArray = [...nodesList];
-    let index = nodesArray.findIndex(node => (
+    let index = nodesArray.findIndex((node) => (
       node.classList.contains("active")
     )) + 1;
 
-    if (index != nodesArray.length) {
-      deactivate();
-      activate(nodesArray[index]);
-    }
-
-    if (index == nodesArray.length -1) {
-      currentTarget.classList.add("disabled");
-    }
+    deactivate();
+    activate(nodesArray[index]);
+    arrowController(index);
   };
 
   const deactivate = () => {
@@ -52,7 +79,7 @@
     activeNode.classList.remove('active');
   }
 
-  const activate = (node) => node.classList.add("active") || node;
+  const activate = (node) => node.classList.add("active");
 
   const hideContent = (node) => {
     let articlesList = document.querySelectorAll('article');
