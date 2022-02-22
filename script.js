@@ -27,9 +27,20 @@
       return;
     }
 
-    let last = deactivate();
-    let current = activate(last.nextElementSibling);
-    showContent(current, hideContent());
+    let nodesList = document.querySelectorAll("[class^='diagram-node']");
+    let nodesArray = [...nodesList];
+    let index = nodesArray.findIndex(node => (
+      node.classList.contains("active")
+    )) + 1;
+
+    if (index != nodesArray.length) {
+      deactivate();
+      activate(nodesArray[index]);
+    }
+
+    if (index == nodesArray.length -1) {
+      currentTarget.classList.add("disabled");
+    }
   };
 
   const deactivate = () => {
@@ -38,7 +49,7 @@
     let activeNode = nodesArray.find((node) => (
       node.classList.contains('active')
     ));
-    return activeNode.classList.remove('active') || activeNode;
+    activeNode.classList.remove('active');
   }
 
   const activate = (node) => node.classList.add("active") || node;
