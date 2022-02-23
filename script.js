@@ -24,6 +24,9 @@
     const LEFT_DISABLE = 0;
     const RIGHT_DISABLE = 5;
 
+    let disabled = document.querySelector("[class*='disabled']");
+    if (disabled) disabled.classList.remove("disabled");
+
     if (index == LEFT_DISABLE) {
       let leftArrow = document.querySelector(".gallery-left-arrow");
       leftArrow.classList.add("disabled");
@@ -33,9 +36,6 @@
       rightArrow.classList.add("disabled");
       return;
     }
-
-    let disabled = document.querySelector("[class*='disabled']");
-    if (disabled) disabled.classList.remove("disabled");
   };
 
   const previous = ({currentTarget}) => {
