@@ -15,11 +15,13 @@
   };
 
   const showcase = ({currentTarget}) => {
+    let articlesArray = [...document.querySelectorAll("article")];
     let diagramNodes = document.querySelectorAll("[class^='diagram-node']");
     let nodesArray = [...diagramNodes];
     deactivate(nodesArray);
     activate(nodesArray, currentTarget);
-    showContent(currentTarget, hideContent());
+    hideContent(articlesArray);
+    showContent(currentTarget, articlesArray);
   }
 
   const arrowController = (index) => {
@@ -75,22 +77,17 @@
   };
 
   const deactivate = (nodes) => {
-    nodes.forEach(n => n.classList.remove('active'));
+    nodes.forEach((n) => n.classList.remove('active'));
   }
 
   const activate = (nodes, target) => {
-    let index = nodes.findIndex((node) => node == target);
+    let index = nodes.findIndex((n) => n == target);
     arrowController(index);
     target.classList.add("active");
   }
 
-  const hideContent = (node) => {
-    let articlesList = document.querySelectorAll('article');
-    let articlesArray = [...articlesList];
-    let visibleArticle = articlesArray.find((article) => (
-      article.classList.contains("article-visible")
-    ));
-    return visibleArticle.classList.remove("article-visible") || articlesArray;
+  const hideContent = (articles) => {
+    articles.forEach((a) => a.classList.remove("article-visible"));
   };
 
   const showContent = (node, articles) => {
