@@ -3,7 +3,7 @@
 (function() {
   const init = () => {
     let nodesList = document.querySelectorAll("[class^='diagram-node']");
-    [...nodesList].forEach((node) => node.addEventListener("click", showcase));
+    [...nodesList].forEach((node) => node.addEventListener("click", showcase, {list: nodesList}));
     let arrows = document.querySelectorAll("[class*='arrow']");
     [...arrows].forEach((arrow) => {
       if (arrow.classList.contains("gallery-left-arrow")) {
@@ -15,7 +15,9 @@
   };
 
   const showcase = ({currentTarget}) => {
-    deactivate();
+    let diagramNodes = document.querySelectorAll("[class^='diagram-node']");
+    let nodesArray = [...diagramNodes];
+    deactivate(nodesArray);
     activate(currentTarget);
     showContent(currentTarget, hideContent());
   }
@@ -31,7 +33,9 @@
       let leftArrow = document.querySelector(".gallery-left-arrow");
       leftArrow.classList.add("disabled");
       return;
-    } else if (index == RIGHT_DISABLE) {
+    }
+
+    if (index == RIGHT_DISABLE) {
       let rightArrow = document.querySelector(".gallery-right-arrow");
       rightArrow.classList.add("disabled");
       return;
@@ -49,7 +53,7 @@
       node.classList.contains("active")
     )) - 1;
 
-    deactivate();
+    deactivate(nodesArray);
     activate(nodesArray[index]);
     arrowController(index);
   };
@@ -65,18 +69,13 @@
       node.classList.contains("active")
     )) + 1;
 
-    deactivate();
+    deactivate(nodesArray);
     activate(nodesArray[index]);
     arrowController(index);
   };
 
-  const deactivate = () => {
-    let nodesList = document.querySelectorAll("[class^='diagram-node']");
-    let nodesArray = [...nodesList];
-    let activeNode = nodesArray.find((node) => (
-      node.classList.contains('active')
-    ));
-    activeNode.classList.remove('active');
+  const deactivate = (nodes) => {
+    nodes.forEach(n => n.classList.remove('active'));
   }
 
   const activate = (node) => {
