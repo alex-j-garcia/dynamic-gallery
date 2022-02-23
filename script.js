@@ -79,7 +79,13 @@
     activeNode.classList.remove('active');
   }
 
-  const activate = (node) => node.classList.add("active");
+  const activate = (node) => {
+    let nodesList = document.querySelectorAll("[class^='diagram-node']");
+    let nodesArray = [...nodesList];
+    let index = nodesArray.findIndex((n) => n == node);
+    arrowController(index);
+    node.classList.add("active");
+  }
 
   const hideContent = (node) => {
     let articlesList = document.querySelectorAll('article');
