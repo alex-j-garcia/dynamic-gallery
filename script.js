@@ -20,8 +20,7 @@
     let nodesArray = [...diagramNodes];
     deactivate(nodesArray);
     activate(nodesArray, currentTarget);
-    hideContent(articlesArray);
-    showContent(currentTarget, articlesArray);
+    showContent(currentTarget, hideContent(articlesArray));
   }
 
   const arrowController = (index) => {
@@ -57,6 +56,11 @@
 
     deactivate(nodesArray);
     activate(nodesArray, nodesArray[index]);
+
+    // TODO: refactor this
+    let articles = [...document.querySelectorAll("article")];
+    showContent(nodesArray[index], hideContent(articles));
+    
     arrowController(index);
   };
 
@@ -73,6 +77,11 @@
 
     deactivate(nodesArray);
     activate(nodesArray, nodesArray[index]);
+
+    // TODO: refactor this
+    let articles = [...document.querySelectorAll("article")];
+    showContent(nodesArray[index], hideContent(articles));
+
     arrowController(index);
   };
 
@@ -88,14 +97,15 @@
 
   const hideContent = (articles) => {
     articles.forEach((a) => a.classList.remove("article-visible"));
+    return articles;
   };
 
   const showContent = (node, articles) => {
     let contentID = node.getAttribute("data-id");
-    let article = articles.find((article) => (
-      article.getAttribute("data-content") == contentID
+    let target = articles.find((a) => (
+      a.getAttribute("data-content") == contentID
     ));
-    article.classList.add("article-visible");
+    target.classList.add("article-visible");
   };
 
   init();
