@@ -4,7 +4,7 @@
   const init = () => {
     let nodesList = document.querySelectorAll("[class^='diagram-node']");
     let arrows = document.querySelectorAll("[class*='arrow']");
-    [...nodesList].forEach((node) => node.addEventListener("click", showcase, {list: nodesList}));
+    [...nodesList].forEach((node) => node.addEventListener("click", showcase));
     [...arrows].forEach((arrow) => {
       if (arrow.classList.contains("gallery-left-arrow")) {
         arrow.addEventListener("click", previous);
