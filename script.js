@@ -95,10 +95,9 @@
     target.classList.add("active");
   }
 
-  const hideContent = (articles) => {
-    articles.forEach((a) => a.classList.remove("article-visible"));
-    return articles;
-  };
+  const hideContent = (articles) => (
+    articles.forEach((a) => a.classList.remove("article-visible")) || articles
+  );
 
   const showContent = (node, articles) => {
     let contentID = node.getAttribute("data-id");
