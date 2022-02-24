@@ -3,18 +3,13 @@
 (function() {
   const init = () => {
     let nodesList = document.querySelectorAll("[class^='diagram-node']");
-    let arrows = document.querySelectorAll("[class*='arrow']");
     [...nodesList].forEach((node) => node.addEventListener("click", showcase));
-    [...arrows].forEach((arrow) => {
-      if (arrow.classList.contains("gallery-left-arrow")) {
-        arrow.addEventListener("click", previous);
-      } else {
-        arrow.addEventListener("click", next);
-      }
-    });
+    [...document.querySelectorAll("[class*='arrow']")].forEach((arrow) => (
+      arrow.addEventListener("click", arrowController)
+    ));
   };
 
-  const showcase = ({currentTarget}) => {
+  const showcase = ({ currentTarget }) => {
     let articlesArray = [...document.querySelectorAll("article")];
     let diagramNodes = document.querySelectorAll("[class^='diagram-node']");
     let nodesArray = [...diagramNodes];
@@ -23,66 +18,86 @@
     showContent(currentTarget, hideContent(articlesArray));
   }
 
-  const arrowController = (index) => {
+  const arrowController = (eventOrIndex) => {
     const LEFT_DISABLE = 0;
     const RIGHT_DISABLE = 5;
 
-    let disabled = document.querySelector("[class*='disabled']");
-    if (disabled) disabled.classList.remove("disabled");
-
-    if (index == LEFT_DISABLE) {
-      let leftArrow = document.querySelector(".gallery-left-arrow");
-      leftArrow.classList.add("disabled");
-      return;
+    if (typeof eventOrIndex == "number") {
+      let i = eventOrIndex;
+      nodeClick(i);
+    } else {
+      let { currentTarget } = eventOrIndex;
+      arrowClick(currentTarget);
     }
 
-    if (index == RIGHT_DISABLE) {
-      let rightArrow = document.querySelector(".gallery-right-arrow");
-      rightArrow.classList.add("disabled");
-      return;
+    function arrowClick(targetArrow) {
+      if (targetArrow.classList.contains('disabled')) {
+        return;
+      }
+
+      let disabled = document.querySelector("[class*='disabled']");
+      if (disabled) {
+        disabled.classList.remove("disabled");
+      }
+
+      let isLeft = targetArrow.classList.contains("gallery-left-arrow");
+      let index;
+      if (isLeft) {
+        targetArrow = document.querySelector(".gallery-left-arrow");
+        index = previous();
+      } else {
+        targetArrow = document.querySelector(".gallery-right-arrow");
+        index = next();
+      }
+
+      if (index == LEFT_DISABLE) {
+        targetArrow.classList.add("disabled");
+        return;
+      }
+
+      if (index == RIGHT_DISABLE) {
+        targetArrow.classList.add("disabled");
+        return;
+      }
     }
+
+    function nodeClick(index) {
+      let disabled = document.querySelector("[class*='disabled']");
+      if (disabled) {
+        disabled.classList.remove("disabled");
+      }
+      
+      if (index == LEFT_DISABLE) {
+        let arrow = document.querySelector(".gallery-left-arrow");
+        arrow.classList.add("disabled");
+        return;
+      }
+
+      if (index == RIGHT_DISABLE) {
+        let arrow = document.querySelector(".gallery-right-arrow");
+        arrow.classList.add("disabled");
+        return;
+      }
+    }
+
   };
 
-  const previous = ({currentTarget}) => {
-    if (currentTarget.classList.contains("disabled")) {
-      return;
-    }
-
-    let nodesList = document.querySelectorAll("[class^='diagram-node']");
-    let nodesArray = [...nodesList];
-    let index = nodesArray.findIndex((node) => (
+  const previous = () => {
+    let nodes = [...document.querySelectorAll("[class^='diagram-node']")];
+    let index = nodes.findIndex((node) => (
       node.classList.contains("active")
     )) - 1;
 
-    deactivate(nodesArray);
-    activate(nodesArray, nodesArray[index]);
-
-    // TODO: refactor this
-    let articles = [...document.querySelectorAll("article")];
-    showContent(nodesArray[index], hideContent(articles));
-    
-    arrowController(index);
+    return showcase({ currentTarget: nodes[index] }) || index;
   };
 
-  const next = ({currentTarget}) => {
-    if (currentTarget.classList.contains("disabled")) {
-      return;
-    }
-
-    let nodesList = document.querySelectorAll("[class^='diagram-node']");
-    let nodesArray = [...nodesList];
-    let index = nodesArray.findIndex((node) => (
+  const next = () => {
+    let nodes = [...document.querySelectorAll("[class^='diagram-node']")];
+    let index = nodes.findIndex((node) => (
       node.classList.contains("active")
     )) + 1;
 
-    deactivate(nodesArray);
-    activate(nodesArray, nodesArray[index]);
-
-    // TODO: refactor this
-    let articles = [...document.querySelectorAll("article")];
-    showContent(nodesArray[index], hideContent(articles));
-
-    arrowController(index);
+    return showcase({ currentTarget: nodes[index] }) || index;
   };
 
   const deactivate = (nodes) => (
@@ -91,8 +106,8 @@
 
   const activate = (nodes, target) => {
     let index = nodes.findIndex((n) => n == target);
-    arrowController(index);
     target.classList.add("active");
+    arrowController(index);
   }
 
   const hideContent = (articles) => (
