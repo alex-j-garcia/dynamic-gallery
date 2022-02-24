@@ -85,9 +85,9 @@
     arrowController(index);
   };
 
-  const deactivate = (nodes) => {
-    nodes.forEach((n) => n.classList.remove('active'));
-  }
+  const deactivate = (nodes) => (
+    nodes.forEach((n) => n.classList.remove('active'))
+  );
 
   const activate = (nodes, target) => {
     let index = nodes.findIndex((n) => n == target);
