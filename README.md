@@ -12,3 +12,8 @@ This was inspired by an old GitHub diagram that can be seen [here](https://web.a
 * Functions declared with the `function` keyword have an `arguments` object that can be accessed in the body to iterated through the arguments passed on invocation. Arrow functions do not have this. A preferable way of accessing the arguments is via the rest parameter.
 * A CSS declaration of `white-space: nowrap;` prevents text inside `<code>` elements from spanning multiples lines, keeping the text together. This just looks better.
 * An "array-like" object is one that has a `length` property and whose properties are indexed from 0, but it doesn't have Array's built-in methods, e.g. `forEach`.
+* The DOM's APIs can return different types of objects, none of which are arrays:
+  * An object of type `NodeList` will contain all nodes, including text nodes and comment nodes, which you may not want: `document.body.childNodes`.
+  * An object of type `HTMLCollection` contains only HTML elements, which is more often what you will want when querying the DOM: `document.body.children`.
+  * An object of type `DOMTokenList` represents a set of space-separated tokens: `someElement.classList`.
+    *  Using a DOMTokenList in a string produces a string of the tokens separated by a space rather than `"[object DOMTokenList]"`.
