@@ -16,4 +16,4 @@ This was inspired by an old GitHub diagram that can be seen [here](https://web.a
   * An object of type `NodeList` will contain all nodes, including text nodes and comment nodes, which you may not want: `document.body.childNodes`.
   * An object of type `HTMLCollection` contains only HTML elements, which is more often what you will want when querying the DOM: `document.body.children`.
   * An object of type `DOMTokenList` represents a set of space-separated tokens: `someElement.classList`.
-    *  Using a DOMTokenList in a string produces a string of the tokens separated by a space rather than `"[object DOMTokenList]"`.
+    *  Using a DOMTokenList in a string produces a string of space-separated tokens rather than `"[object DOMTokenList]"`.
